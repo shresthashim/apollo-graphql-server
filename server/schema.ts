@@ -25,6 +25,9 @@ export const typeDefs = gql`
 `;
 
 export const resolvers = {
+  // Resolver for the user field on the Project type
+  // One API call and we find projects and users by id (BOTH) in the same call
+
   Project: {
     user: (project: any) => {
       return USERS.find((user) => user.id === project.userId);
@@ -33,9 +36,13 @@ export const resolvers = {
 
   Query: {
     projects: () => PROJECTS,
-    users: () => USERS,
-    getUser: (parent: any, { id }) => {
-      return USERS.find((user) => user.id === id);
-    },
+
+    // Resolver for the users query field
+    // users: () => USERS,
+
+    // Resolver for the getUser query field that takes an id argument
+    // getUser: (parent: any, { id }) => {
+    //   return USERS.find((user) => user.id === id);
+    // },
   },
 };
